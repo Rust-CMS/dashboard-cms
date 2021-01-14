@@ -9,7 +9,7 @@
         <tbody>
             <tr v-for="(page, i) in pages" :key="i">
                 <td>
-                    {{ page.title }}
+                    {{ page.page_title }}
                 </td>
                 <td>
                     {{ page.page_name }}
