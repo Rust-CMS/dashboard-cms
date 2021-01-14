@@ -4,6 +4,7 @@ import VueRouter from "vue-router"
 import Login from '@/views/Login';
 import Pages from '@/views/Pages';
 import Page from '@/views/Page';
+import Field from '@/views/Field'
 
 Vue.use(VueRouter)
 
@@ -20,7 +21,10 @@ const routes = [
 		path: "/pages",
 		component: Pages
 	},
-	
+	{
+		path: "/fields/:id",
+		component: Field
+	}
 ]
 
 const router = new VueRouter({
