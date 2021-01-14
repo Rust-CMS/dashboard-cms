@@ -11,18 +11,22 @@ Vue.use(VueRouter)
 const routes = [
 	{
 		path: "/login",
+		name: "Login",
 		component: Login
 	},
 	{
 		path: "/pages/:id",
+		name: "Page",
 		component: Page
 	},
 	{
 		path: "/pages",
+		name: "Pages",
 		component: Pages
 	},
 	{
 		path: "/fields/:id",
+		name: "Field",
 		component: Field
 	}
 ]
