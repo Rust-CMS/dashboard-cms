@@ -4,6 +4,7 @@
             <th>Title</th>
             <th>Name</th>
             <th>URL</th>
+            <th>Actions</th>
         </thead>
         <tbody>
             <tr v-for="(page, i) in pages" :key="i">
@@ -18,7 +19,7 @@
                 </td>
                 <td>
                     <a :href="page.page_url">View</a>
-                    <a href="">Edit</a>
+                    <a :href="`/pages/${page.page_name}`">Edit</a>
                 </td>
             </tr>
         </tbody>
