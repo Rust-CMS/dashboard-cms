@@ -19,7 +19,7 @@
                 </td>
                 <td>
                     <a :href="page.page_url">View</a>
-                    <a :href="`/pages/${page.page_name}`">Edit</a>
+                    <a :href="`/pages/${page.id}`">Edit</a>
                 </td>
             </tr>
         </tbody>

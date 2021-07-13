@@ -4,8 +4,8 @@
         <form class="field-form" @submit="updateField">
             <input type="text" v-model="field.title" />
             <input type="text" v-model="field.content" />
-            <select v-model="field.page_name">
-                <option v-for="(page, i) in pages" :key="i" :value="page.page_name">{{page.page_name}}</option>
+            <select v-model="field.page_id">
+                <option v-for="(page, i) in pages" :key="i" :value="page.id">{{page.page_name}}</option>
             </select>
             <button type="submit">Save</button>
         </form>

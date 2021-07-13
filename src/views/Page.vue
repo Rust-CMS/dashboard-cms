@@ -1,7 +1,10 @@
 <template>
 	<main>
         <h1>Page {{ page.title }}</h1>
-        <FieldTable :fields="pagemodule.fields"/>
+        <FieldTable :fields="pagemodule.fields.modules"/>
+        <h3>Categories</h3>
+        <FieldTable :fields="pagemodule.fields.categories"/>
+
         <form class="page-form" @submit="update_page">
             <input type="text" v-model="page.page_name">
             <input type="text" v-model="page.page_url">
