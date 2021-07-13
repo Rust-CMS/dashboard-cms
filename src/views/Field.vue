@@ -1,22 +1,19 @@
 <template>
-    <main>
-        <h1>Field {{ field.title }}</h1>
-        <form class="field-form" @submit="updateField">
-            <input type="text" v-model="field.title" />
-            <input type="text" v-model="field.content" />
-            <select v-model="field.page_id">
-                <option v-for="(page, i) in pages" :key="i" :value="page.id">{{page.page_name}}</option>
-            </select>
-            <button type="submit">Save</button>
-        </form>
-    </main>
+	<main>
+		<h1>Field {{ field.title }}</h1>
+		<field-mutate @mutate="update_field" :field="field" :pages="pages" />
+	</main>
 </template>
 
 <script>
-import { get, put } from "axios";
+import { get } from "axios";
+import FieldMutate from '../components/FieldMutate.vue';
 
 export default {
     name: "Field",
+    components: {
+        FieldMutate
+    },
     data() {
         return {
             field: {},
@@ -33,6 +30,13 @@ export default {
         this.pages = pages.data.message;
     },
     methods: {
+        async update_field($event) {
+            $event.preventDefault();
+
+            console.log($event);
+
+            
+        },
         async getField() {
             let id = this.$route.params.id;
             return await get(`/modules/${id}`);
@@ -40,19 +44,13 @@ export default {
         async getPages() {
             return await get(`/pages`);
         },
-        async updateField(e) {
-            e.preventDefault();
-
-            let id = this.$route.params.id;
-            return await put(`/modules/${id}`, this.field);
-        }
     }
 }
 </script>
 
 <style scoped>
 .field-form {
-    display: flex;
-    flex-direction: column;
+	display: flex;
+	flex-direction: column;
 }
 </style>

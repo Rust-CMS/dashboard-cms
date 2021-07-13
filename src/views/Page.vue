@@ -1,6 +1,7 @@
 <template>
 	<main>
         <h1>Page {{ page.title }}</h1>
+        <button @click="create_field">+</button>
         <FieldTable :fields="pagemodule.fields.modules"/>
         <h3>Categories</h3>
         <FieldTable :fields="pagemodule.fields.categories"/>
@@ -38,6 +39,9 @@ export default {
         this.page = page;
 	},
 	methods: {
+        async create_field() {
+            console.error("Unimplemented")
+        },
 		async get_page() {
             let id = this.$route.params.id;
             let page_req = await get(`/pages/${id}/modules`);

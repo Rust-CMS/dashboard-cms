@@ -26,6 +26,7 @@ export default {
     },
     methods: {
         async create_page() {
+            console.error("Unimplemented")
         },
         async get_pages() {
             let pages_req = await get("/pages");
