@@ -34,8 +34,6 @@ export default {
             $event.preventDefault();
 
             console.log($event);
-
-            
         },
         async getField() {
             let id = this.$route.params.id;

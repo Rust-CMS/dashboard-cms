@@ -10,28 +10,28 @@
 		<button type="submit">Save</button>
 	</form>
 </template>
+
 <script>
+import Vue from "vue";
 export default {
     props: {
         pages: {
             type: Array,
             required: false,
-            default: () => []
         },
         field: {
             required: false,
-            default: () => []
         }
     },
 	data() {
 		return {
-            inner_field: this.field,
-            inner_pages: this.pages
+            inner_field: Vue.util.extend({}, this.field),
+            inner_pages: Vue.util.extend({}, this.pages)
         };
 	},
-    created() {
-        console.log(this.inner_field);
-    },
+	created() {
+		console.log(this.field);
+	},
 	methods: {
 		mutate($evt) {
 			this.$emit("value", $evt);
