@@ -1,12 +1,12 @@
 <template>
 	<form class="field-form" @submit="mutate">
-		<input type="text" v-model="inner_field.title" />
-		<input type="text" v-model="inner_field.content" />
-		<select v-model="inner_field.page_id">
-			<option v-for="(page, i) in inner_pages" :key="i" :value="page.id">
+		<v-text-field type="text" v-model="inner_field.title" />
+		<v-text-field type="text" v-model="inner_field.content" />
+		<v-select v-model="inner_field.page_id">
+			<v-option v-for="(page, i) in inner_pages" :key="i" :value="page.id">
 				{{ page.page_name }}
-			</option>
-		</select>
+			</v-option>
+		</v-select>
 		<button type="submit">Save</button>
 	</form>
 </template>

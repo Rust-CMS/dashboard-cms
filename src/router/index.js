@@ -1,33 +1,36 @@
 import Vue from "vue"
 import VueRouter from "vue-router"
 
-import Login from '@/views/Login';
 import Pages from '@/views/Pages';
 import Page from '@/views/Page';
 import Field from '@/views/Field'
 
 Vue.use(VueRouter)
 
-const routes = [
-	{
-		path: "/login",
-		name: "Login",
-		component: Login
-	},
+export const routes = [
 	{
 		path: "/pages/:id",
 		name: "Page",
-		component: Page
+		component: Page,
+		meta: {
+			show: false
+		}
 	},
 	{
 		path: "/pages",
 		name: "Pages",
-		component: Pages
+		component: Pages,
+		meta: {
+			show: true
+		}
 	},
 	{
 		path: "/fields/:id",
 		name: "Field",
-		component: Field
+		component: Field,
+		meta: {
+			show: false
+		}
 	}
 ]
 

@@ -1,6 +1,6 @@
 <template>
     <main>
-        <h1>Pages</h1> <button @click="create_page">+</button>
+        <h1>Pages</h1> <v-btn @click="create_page">+</v-btn>
         <PageTable :pages="pages" />
     </main>
 </template>
