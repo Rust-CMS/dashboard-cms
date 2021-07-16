@@ -6,10 +6,10 @@
                 <th>Actions</th>
             </thead>
             <tbody>
-                <tr v-for="(field, i) in fields" :key="i">
-                    <td>{{ field.title }}</td>
+                <tr v-for="(category, i) in categories" :key="i">
+                    <td>{{ category.title }}</td>
                     <td>
-                        <v-btn :href="`/fields/${field.module_id}`">Edit</v-btn>
+                        <v-btn :href="`/fields/categories/${category.id}`">Edit</v-btn>
                     </td>
                 </tr>
             </tbody>
@@ -20,7 +20,7 @@
 <script>
 export default {
     props: {
-        fields: {
+        categories: {
             required: false,
         }
     }

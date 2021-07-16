@@ -4,7 +4,7 @@ import VueRouter from "vue-router"
 import Pages from '@/views/Pages';
 import Page from '@/views/Page';
 import Field from '@/views/Field'
-
+import Category from "@/views/Category"
 Vue.use(VueRouter)
 
 export const routes = [
@@ -22,6 +22,14 @@ export const routes = [
 		component: Pages,
 		meta: {
 			show: true
+		}
+	},
+	{
+		path: "/fields/categories/:id",
+		name: "Categories",
+		component: Category,
+		meta: {
+			show: false
 		}
 	},
 	{

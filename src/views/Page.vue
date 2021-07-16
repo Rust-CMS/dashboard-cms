@@ -11,7 +11,7 @@
         <v-card class="page-widget">
             <v-card-title>Categories</v-card-title>
             <v-card-text>
-                <CategoryTable :fields="pagemodule.fields.categories" />
+                <CategoryTable :categories="pagemodule.fields.categories" />
             </v-card-text>
         </v-card>
         <v-card class="page-widget">
