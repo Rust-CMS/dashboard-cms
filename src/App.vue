@@ -12,8 +12,8 @@
                         v-for="(route, i) in routes"
 						:show="route.meta.show"
                         :key="i"
-                        :nav_title="route.name"
-                        :icon_name="route.icon"
+                        :navTitle="route.name"
+                        :iconName="route.icon"
                         :link="route.path"
                     />
                 </v-list-item-group>
