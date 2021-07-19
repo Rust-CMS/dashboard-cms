@@ -1,8 +1,8 @@
 <template>
 	<form class="field-form" @submit="mutate">
-		<v-text-field type="text" v-model="innerField.title" />
-		<v-text-field type="text" v-model="innerField.content" />
-		<v-select v-model="innerField.page_id" :items="pages" item-text="page_title" item-value="id">
+		<v-text-field placeholder="Field Title" type="text" v-model="innerField.title" />
+		<v-text-field placeholder="Field Content" type="text" v-model="innerField.content" />
+		<v-select placeholder="Field Page" v-model="innerField.page_id" :items="pages" item-text="page_title" item-value="id">
 		</v-select>
 		<v-btn type="submit">Save</v-btn>
 	</form>
