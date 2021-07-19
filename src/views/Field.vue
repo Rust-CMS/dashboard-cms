@@ -1,7 +1,7 @@
 <template>
 	<main>
 		<h1>Field {{ field.title }}</h1>
-		<field-mutate v-if="Object.keys(pages).length > 0" @value="update_field" :field="field" :pages="pages" />
+		<field-mutate v-if="Object.keys(pages).length > 0" @value="updateField" :field="field" :pages="pages" />
 	</main>
 </template>
 
@@ -22,11 +22,9 @@ export default {
     },
     async created() {
         let field = await this.getField();
-
         this.field = field.data.message;
 
         let pages = await this.getPages();
-
         this.pages = pages.data.message;
     },
     methods: {

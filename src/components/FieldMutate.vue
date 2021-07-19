@@ -1,8 +1,8 @@
 <template>
 	<form class="field-form" @submit="mutate">
-		<v-text-field type="text" v-model="inner_field.title" />
-		<v-text-field type="text" v-model="inner_field.content" />
-		<v-select v-model="inner_field.page_id" :items="pages" item-text="page_title" item-value="id">
+		<v-text-field type="text" v-model="innerField.title" />
+		<v-text-field type="text" v-model="innerField.content" />
+		<v-select v-model="innerField.page_id" :items="pages" item-text="page_title" item-value="id">
 		</v-select>
 		<v-btn type="submit">Save</v-btn>
 	</form>
@@ -21,14 +21,14 @@ export default {
     },
 	data() {
 		return {
-            inner_field: this.field,
-            inner_pages: this.pages
+            innerField: this.field,
+            innerPages: this.pages
         };
 	},
 	methods: {
 		mutate($evt) {
 			$evt.preventDefault();
-			this.$emit("value", this.inner_field);
+			this.$emit("value", this.innerField);
 		},
 	},
 };
