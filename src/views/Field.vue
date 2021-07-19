@@ -30,7 +30,8 @@ export default {
         this.pages = pages.data.message;
     },
     methods: {
-        async update_field(field) {
+        async updateField(field) {
+            this.field = field;
             let id = this.$route.params.id;
             return await put(`/modules/${id}`, field);
         },
