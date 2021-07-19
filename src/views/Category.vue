@@ -12,8 +12,7 @@
         <v-card class="fields">
             <v-card-title>Edit Category</v-card-title>
             <v-card-text>
-                <v-text-field type="text" v-model="category.title" />
-                <v-btn>SAVE</v-btn>
+                <CategoryMutate v-if="Object.keys(category).length > 0" :category="category" @value="updateCategory" />
             </v-card-text>
         </v-card>
     </div>
@@ -21,10 +20,12 @@
 
 <script>
 import FieldTable from '../components/FieldTable.vue'
-import { get } from "axios";
+import { get, put } from "axios";
+import CategoryMutate from '../components/CategoryMutate.vue';
 export default {
     components: {
-        FieldTable
+        FieldTable,
+        CategoryMutate
     },
     data () {
         return {
@@ -40,6 +41,11 @@ export default {
         this.fields = fields.data.message;
     },
     methods: {
+        async updateCategory(category) {
+            this.category = category;
+            let id = this.$route.params.id;
+            return await put(`/category/${id}`, category);
+        },
         async getFields() {
             let id = this.$route.params.id;
             return await get(`/modules/category/${id}`);
