@@ -1,9 +1,9 @@
 <template>
     <v-list-item v-if="show" :to="link">
         <v-list-item-icon>
-            <v-icon>{{icon_name}}</v-icon>
+            <v-icon>{{iconName}}</v-icon>
         </v-list-item-icon>
-        <v-list-item-title>{{nav_title}}</v-list-item-title>
+        <v-list-item-title>{{navTitle}}</v-list-item-title>
     </v-list-item>
 </template>
 
@@ -15,11 +15,11 @@ export default {
 			type: Boolean,
 			default: false
 		},
-        nav_title: {
+        navTitle: {
             required: false,
             type: String
         },
-        icon_name: {
+        iconName: {
             required: false,
             type: String
         },
