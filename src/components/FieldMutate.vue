@@ -2,17 +2,13 @@
 	<form class="field-form" @submit="mutate">
 		<v-text-field type="text" v-model="inner_field.title" />
 		<v-text-field type="text" v-model="inner_field.content" />
-		<v-select v-model="inner_field.page_id">
-			<v-option v-for="(page, i) in inner_pages" :key="i" :value="page.id">
-				{{ page.page_name }}
-			</v-option>
+		<v-select v-model="inner_field.page_id" :items="pages" item-text="page_title" item-value="id">
 		</v-select>
-		<button type="submit">Save</button>
+		<v-btn type="submit">Save</v-btn>
 	</form>
 </template>
 
 <script>
-import Vue from "vue";
 export default {
     props: {
         pages: {
@@ -25,16 +21,14 @@ export default {
     },
 	data() {
 		return {
-            inner_field: Vue.util.extend({}, this.field),
-            inner_pages: Vue.util.extend({}, this.pages)
+            inner_field: this.field,
+            inner_pages: this.pages
         };
-	},
-	created() {
-		console.log(this.field);
 	},
 	methods: {
 		mutate($evt) {
-			this.$emit("value", $evt);
+			$evt.preventDefault();
+			this.$emit("value", this.inner_field);
 		},
 	},
 };

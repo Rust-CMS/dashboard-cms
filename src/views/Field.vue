@@ -1,12 +1,12 @@
 <template>
 	<main>
 		<h1>Field {{ field.title }}</h1>
-		<field-mutate @mutate="update_field" :field="field" :pages="pages" />
+		<field-mutate v-if="Object.keys(pages).length > 0" @value="update_field" :field="field" :pages="pages" />
 	</main>
 </template>
 
 <script>
-import { get } from "axios";
+import { get, put } from "axios";
 import FieldMutate from '../components/FieldMutate.vue';
 
 export default {
@@ -30,10 +30,9 @@ export default {
         this.pages = pages.data.message;
     },
     methods: {
-        async update_field($event) {
-            $event.preventDefault();
-
-            console.log($event);
+        async update_field(field) {
+            let id = this.$route.params.id;
+            return await put(`/modules/${id}`, field);
         },
         async getField() {
             let id = this.$route.params.id;

@@ -1,5 +1,5 @@
 <template>
-    <div id="app">
+    <v-app id="app">
         <v-app-bar app clipped-left>
         </v-app-bar>
 
@@ -25,7 +25,7 @@
                 <router-view />
             </v-container>
         </v-main>
-    </div>
+    </v-app>
 </template>
 
 <script>
