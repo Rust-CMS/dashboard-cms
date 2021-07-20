@@ -20,7 +20,7 @@
                     </td>
                     <td>
                         <v-btn :href="page.page_url">View</v-btn>
-                        <v-btn :href="`/pages/${page.id}`">Edit</v-btn>
+                        <v-btn :href="`/pages/${page.uuid}`">Edit</v-btn>
                     </td>
                 </tr>
             </tbody>

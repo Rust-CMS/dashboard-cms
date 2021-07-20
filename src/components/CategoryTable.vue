@@ -9,7 +9,7 @@
                 <tr v-for="(category, i) in categories" :key="i">
                     <td>{{ category.title }}</td>
                     <td>
-                        <v-btn :href="`/fields/categories/${category.id}`">Edit</v-btn>
+                        <v-btn :href="`/fields/categories/${category.uuid}`">Edit</v-btn>
                     </td>
                 </tr>
             </tbody>

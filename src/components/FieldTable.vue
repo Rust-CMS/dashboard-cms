@@ -11,7 +11,7 @@
                     <td>{{ field.title }}</td>
                     <td>{{ field.content }}</td>
                     <td>
-                        <v-btn :href="`/fields/${field.module_id}`">Edit</v-btn>
+                        <v-btn :href="`/fields/${field.uuid}`">Edit</v-btn>
                     </td>
                 </tr>
             </tbody>

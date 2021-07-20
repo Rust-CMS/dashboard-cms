@@ -2,9 +2,9 @@
 	<form class="field-form" @submit="mutate">
 		<v-text-field placeholder="Field Title" type="text" v-model="innerField.title" />
 		<v-text-field placeholder="Field Content" type="text" v-model="innerField.content" />
-		<v-select placeholder="Field Page" v-model="innerField.page_id" :items="pages" item-text="page_title" item-value="id">
+		<v-select placeholder="Field Page" hint="Change what page this is displayed on." persistent-hint v-model="innerField.uuid" :items="pages" item-text="page_title" item-value="uuid">
 		</v-select>
-		<v-btn type="submit">Save</v-btn>
+		<v-btn class="mt-5" type="submit">Save</v-btn>
 	</form>
 </template>
 

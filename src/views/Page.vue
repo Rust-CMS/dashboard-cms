@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-dialog v-model="createDialog" max-width="600px">
+        <v-dialog v-model="createFieldDialog" max-width="600px">
             <v-card>
                 <v-card-title>
                     Create Field
@@ -10,24 +10,35 @@
                 </v-card-text>
             </v-card>
         </v-dialog>
+        <v-dialog v-model="createCategoryDialog" max-width="600px">
+            <v-card>
+                <v-card-title>
+                    Create Category
+                </v-card-title>
+                <v-card-text>
+                    <CategoryMutate @value="createCategory" :pages="pages" :category="{}" />
+                </v-card-text>
+            </v-card>
+        </v-dialog>
 
         <h1>Page {{ page.title }}</h1>
         <v-card class="page-widget">
             <v-card-title>Fields</v-card-title>
-            <v-card-text>
-                <v-btn class="my-3" @click="createDialog = true">+</v-btn>
+            <v-card-text v-if="pagemodule">
+                <v-btn class="my-3" @click="createFieldDialog = true">+</v-btn>
                 <FieldTable :fields="pagemodule.fields.modules" />
             </v-card-text>
         </v-card>
         <v-card class="page-widget">
             <v-card-title>Categories</v-card-title>
-            <v-card-text>
+            <v-card-text v-if="pagemodule">
+                <v-btn class="my-3" @click="createCategoryDialog = true">+</v-btn>
                 <CategoryTable :categories="pagemodule.fields.categories" />
             </v-card-text>
         </v-card>
         <v-card class="page-widget">
             <v-card-title>Edit Page</v-card-title>
-            <v-card-text>
+            <v-card-text v-if="page">
                 <form class="page-form" @submit="updatePage">
                     <v-text-field type="text" v-model="page.page_name" />
                     <v-text-field type="text" v-model="page.page_url" />
@@ -43,24 +54,26 @@
 import { get, put, post } from "axios";
 import FieldTable from "@/components/FieldTable";
 import CategoryTable from "@/components/CategoryTable";
-import FieldMutate from "../components/FieldMutate.vue";
+import FieldMutate from "@/components/FieldMutate.vue";
+import CategoryMutate from "@/components/CategoryMutate.vue";
 
 export default {
     name: "Page",
     data() {
         return {
-            pagemodule: {},
-            page: {},
+            pagemodule: false,
+            page: false,
+            pages: false,
 
-            pages: [],
-
-            createDialog: false,
+            createFieldDialog: false,
+            createCategoryDialog: false,
         };
     },
     components: {
         FieldTable,
         CategoryTable,
         FieldMutate,
+        CategoryMutate,
     },
     async created() {
         let pagemodule = await this.getPage();
@@ -73,6 +86,10 @@ export default {
         this.pages = pages.message;
     },
     methods: {
+        async createCategory(category) {
+            this.pagemodule.fields.categories.push(category);
+            await post(`/category`, category);
+        },
         async createField(field) {
             this.pagemodule.fields.modules.push(field);
 
@@ -81,7 +98,6 @@ export default {
                 module_type_id: 1,
             };
             await post(`/modules`, req_field);
-            console.error("Unimplemented");
         },
         async getPage() {
             let id = this.$route.params.id;

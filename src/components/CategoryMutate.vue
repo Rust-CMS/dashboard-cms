@@ -1,6 +1,6 @@
 <template>
     <form class="category-form" @submit="mutate">
-		<v-text-field type="text" v-model="inner_category.title" />
+		<v-text-field placeholder="Category Title" type="text" v-model="inner_category.title" />
 		<v-btn type="submit">Save</v-btn>
 	</form>
 </template>
