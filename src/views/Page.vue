@@ -107,12 +107,21 @@ export default {
         async createCategory(category) {
             let res = await post(`/category`, category);
 
-            this.pagemodule.fields.categories.push(res.data.message);
+            res = {
+                ...res.data.message,
+                modules: []
+            }
+
+            this.pagemodule.fields.categories.push(res);
+            
+            this.createCategoryDialog = false;
         },
         async createField(field) {
             let res = await post(`/modules`, field);
 
             this.pagemodule.fields.modules.push(res.data.message);
+
+            this.createFieldDialog = false;
         },
         async getPage() {
             let id = this.$route.params.id;
