@@ -21,6 +21,7 @@
                     <td>
                         <v-btn :href="page.page_url">View</v-btn>
                         <v-btn :href="`/pages/${page.uuid}`">Edit</v-btn>
+                        <v-btn color="error" @click="deletePage(page.uuid, i)">DELETE</v-btn>
                     </td>
                 </tr>
             </tbody>
@@ -29,6 +30,8 @@
 </template>
 
 <script>
+import Axios from "axios";
+
 export default {
     name: "PageTable",
     props: {
@@ -37,5 +40,12 @@ export default {
             required: true,
         },
     },
+    methods: {
+        deletePage(id, idx) {
+            Axios.delete(`/pages/${id}`);
+
+            this.pages.splice(idx, 1)
+        }
+    }
 };
 </script>

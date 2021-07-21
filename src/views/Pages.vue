@@ -1,36 +1,52 @@
 <template>
-    <main>
-        <h1>Pages</h1> <v-btn @click="create_page">+</v-btn>
+    <div>
+        <v-dialog v-model="pageDialog" max-width="600px">
+            <v-card>
+                <v-card-title>
+                    Create Page                    
+                </v-card-title>
+                <v-card-text>
+                    <PageMutate @value="createPage" />
+                </v-card-text>
+            </v-card>
+        </v-dialog>
+
+        <h1>Pages</h1> <v-btn @click="pageDialog = true">+</v-btn>
         <PageTable :pages="pages" />
-    </main>
+    </div>
 </template>
 
 <script>
-import { get } from "axios";
+import { get, post } from "axios";
 
 import PageTable from '@/components/PageTable';
+import PageMutate from "@/components/PageMutate";
 
 export default {
     name: "Pages",
     data() {
         return {
-            pages: []
+            pages: [],
+            pageDialog: false
         }
     },
     components: {
-        PageTable
+        PageTable,
+        PageMutate
     },
     async created() {
-        let pages = await this.get_pages();
+        let pages = await this.getPages();
         this.pages = pages.message;
     },
     methods: {
-        async create_page() {
-            console.error("Unimplemented")
+        async createPage(page) {
+            let pageRes = await post(`/pages`, page);
+
+            this.pages.push(pageRes.data.message)
         },
-        async get_pages() {
-            let pages_req = await get("/pages");
-            return pages_req.data;
+        async getPages() {
+            let pagesRes = await get("/pages");
+            return pagesRes.data;
         }
     }
 }
