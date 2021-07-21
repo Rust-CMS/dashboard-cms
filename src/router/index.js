@@ -17,7 +17,7 @@ export const routes = [
 		}
 	},
 	{
-		path: "/pages",
+		path: "/",
 		name: "Pages",
 		component: Pages,
 		meta: {

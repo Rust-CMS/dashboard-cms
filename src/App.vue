@@ -1,6 +1,6 @@
 <template>
     <v-app id="app">
-        <v-app-bar app clipped-left>
+        <v-app-bar app clipped-left color="deep-purple" dark>
             <v-toolbar-title>RCMS Dashboard</v-toolbar-title>
         </v-app-bar>
 

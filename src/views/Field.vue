@@ -1,24 +1,37 @@
 <template>
-	<main>
-		<h1>Field {{ field.title }}</h1>
-		<field-mutate v-if="Object.keys(pages).length > 0" @value="updateField" :field="field" :pages="pages" />
-	</main>
+    <main>
+        <h1 class="mb-5">Field {{ field.title }}</h1>
+
+        <v-card>
+            <v-card-title>
+                Edit Field
+            </v-card-title>
+            <v-card-text>
+                <FieldMutate
+                    v-if="Object.keys(pages).length > 0"
+                    @value="updateField"
+                    :field="field"
+                    :pages="pages"
+                />
+            </v-card-text>
+        </v-card>
+    </main>
 </template>
 
 <script>
 import { get, put } from "axios";
-import FieldMutate from '../components/FieldMutate.vue';
+import FieldMutate from "../components/FieldMutate.vue";
 
 export default {
     name: "Field",
     components: {
-        FieldMutate
+        FieldMutate,
     },
     data() {
         return {
             field: {},
-            pages: []
-        }
+            pages: [],
+        };
     },
     async created() {
         let field = await this.getField();
@@ -40,13 +53,13 @@ export default {
         async getPages() {
             return await get(`/pages`);
         },
-    }
-}
+    },
+};
 </script>
 
 <style scoped>
 .field-form {
-	display: flex;
-	flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
 </style>
