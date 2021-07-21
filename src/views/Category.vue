@@ -2,53 +2,66 @@
     <div>
         <v-dialog v-model="fieldDialog" max-width="600px">
             <v-card>
-                <v-card-title>
-                    Create Field
-                </v-card-title>
+                <v-card-title> Create Field </v-card-title>
                 <v-card-text>
-                    <FieldMutate @value="createField" :currentPage="category.page_uuid" :pages="pages" :field="{category_uuid: category.uuid}" />
+                    <FieldMutate
+                        @value="createField"
+                        :currentPage="category.page_uuid"
+                        :pages="pages"
+                        :field="{ category_uuid: category.uuid }"
+                    />
                 </v-card-text>
             </v-card>
         </v-dialog>
 
-        <h1>Category Edit Page</h1>
-        
+        <h1>Category {{ category.title }}</h1>
+
         <v-card class="fields">
             <v-card-title>Fields</v-card-title>
             <v-card-text>
-                <v-btn class="mb-3" @click="fieldDialog = true">+</v-btn>
-                <FieldTable :fields="fields" />
+                <div v-if="fields">
+                    <v-btn class="mb-3" @click="fieldDialog = true">+</v-btn>
+                    <FieldTable v-if="fields" :fields="fields" />
+                </div>
+                <v-progress-circular indeterminate color="primary" v-else />
             </v-card-text>
         </v-card>
 
         <v-card class="fields">
             <v-card-title>Edit Category</v-card-title>
             <v-card-text>
-                <CategoryMutate v-if="Object.keys(category).length > 0" :category="category" :pages="pages" @value="updateCategory" />
+                <CategoryMutate
+                    v-if="category"
+                    :category="category"
+                    :pages="pages"
+                    @value="updateCategory"
+                />
+
+                <v-progress-circular indeterminate color="primary" v-else />
             </v-card-text>
         </v-card>
     </div>
 </template>
 
 <script>
-import FieldTable from '../components/FieldTable.vue'
+import FieldTable from "../components/FieldTable.vue";
 import { get, put, post } from "axios";
-import CategoryMutate from '../components/CategoryMutate.vue';
-import FieldMutate from '@/components/FieldMutate.vue';
+import CategoryMutate from "../components/CategoryMutate.vue";
+import FieldMutate from "@/components/FieldMutate.vue";
 export default {
     components: {
         FieldTable,
         CategoryMutate,
-        FieldMutate
+        FieldMutate,
     },
-    data () {
+    data() {
         return {
-            fields: [],
-            pages: [],
-            category: {},
+            fields: false,
+            pages: false,
+            category: false,
 
-            fieldDialog: false
-        }
+            fieldDialog: false,
+        };
     },
     async created() {
         let category = await this.getCategory();
@@ -79,9 +92,9 @@ export default {
             return await get(`/category/${id}`);
         },
         async getPages() {
-            return await get(`/pages`)
-        }
-    }
+            return await get(`/pages`);
+        },
+    },
 };
 </script>
 

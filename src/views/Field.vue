@@ -8,11 +8,12 @@
             </v-card-title>
             <v-card-text>
                 <FieldMutate
-                    v-if="Object.keys(pages).length > 0"
+                    v-if="pages"
                     @value="updateField"
                     :field="field"
                     :pages="pages"
                 />
+                <v-progress-circular indeterminate color="primary" v-else />
             </v-card-text>
         </v-card>
     </main>
@@ -30,7 +31,7 @@ export default {
     data() {
         return {
             field: {},
-            pages: [],
+            pages: false,
         };
     },
     async created() {
