@@ -12,6 +12,7 @@
                     <td>{{ field.content }}</td>
                     <td>
                         <v-btn :href="`/fields/${field.uuid}`">Edit</v-btn>
+                        <v-btn color="error" @click="deleteField(field.uuid, i)">Delete</v-btn>
                     </td>
                 </tr>
             </tbody>
@@ -20,6 +21,7 @@
 </template>
 
 <script>
+import Axios from 'axios';
 export default {
     name: "FieldTable",
     props: {
@@ -28,5 +30,12 @@ export default {
             required: true,
         },
     },
+    methods: {
+        deleteField(uuid, idx) {
+            Axios.delete(`/modules/${uuid}`);
+
+            this.fields.splice(idx, 1);
+        }
+    }
 };
 </script>
