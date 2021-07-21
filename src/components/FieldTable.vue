@@ -10,7 +10,7 @@
                 <tr v-for="(field, i) in fields" :key="i">
                     <td>{{ field.title }}</td>
                     <td>{{ field.content }}</td>
-                    <td>
+                    <td class="actions">
                         <v-btn color="primary" :href="`/fields/${field.uuid}`">Edit</v-btn>
                         <v-btn plain color="error" @click="deleteField(field.uuid, i)">Delete</v-btn>
                     </td>

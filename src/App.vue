@@ -7,7 +7,7 @@
         <v-navigation-drawer app clipped permanent>
             <v-list nav dense> 
                 <v-list-item-group
-                    active-class="deep-purple--text text--accent-4"
+                    active-class=""
                 >
                     <NavItem
                         v-for="(route, i) in routes"
@@ -52,5 +52,9 @@ export default {
 
 .route-container {
     flex: 1;
+}
+
+.actions * {
+    margin: 0 5px;
 }
 </style>
