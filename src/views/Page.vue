@@ -59,12 +59,7 @@
         <v-card class="page-widget">
             <v-card-title>Edit Page</v-card-title>
             <v-card-text>
-                <form v-if="page" class="page-form" @submit="updatePage">
-                    <v-text-field type="text" v-model="page.page_name" />
-                    <v-text-field type="text" v-model="page.page_url" />
-                    <v-text-field type="text" v-model="page.page_title" />
-                    <v-btn type="submit">Save</v-btn>
-                </form>
+                <PageMutate v-if="page" :page="page" @value="updatePage" />
                 <v-skeleton-loader v-else type="card"></v-skeleton-loader>
             </v-card-text>
         </v-card>
@@ -77,6 +72,7 @@ import FieldTable from "@/components/FieldTable";
 import CategoryTable from "@/components/CategoryTable";
 import FieldMutate from "@/components/FieldMutate.vue";
 import CategoryMutate from "@/components/CategoryMutate.vue";
+import PageMutate from '../components/PageMutate.vue';
 
 export default {
     name: "Page",
@@ -95,6 +91,7 @@ export default {
         CategoryTable,
         FieldMutate,
         CategoryMutate,
+        PageMutate
     },
     async created() {
         let pagemodule = await this.getPage();
@@ -126,9 +123,8 @@ export default {
             let pages_req = await get(`/pages`);
             return pages_req.data;
         },
-        async updatePage(e) {
-            e.preventDefault();
-
+        async updatePage(page) {
+            this.page = page;
             let id = this.$route.params.id;
             await put(`/pages/${id}`, this.page);
         },
