@@ -1,6 +1,7 @@
 <template>
     <v-app id="app">
         <v-app-bar app clipped-left>
+            <v-toolbar-title>RCMS Dashboard</v-toolbar-title>
         </v-app-bar>
 
         <v-navigation-drawer app clipped permanent>
@@ -13,7 +14,7 @@
 						:show="route.meta.show"
                         :key="i"
                         :navTitle="route.name"
-                        :iconName="route.icon"
+                        :iconName="route.meta.icon"
                         :link="route.path"
                     />
                 </v-list-item-group>

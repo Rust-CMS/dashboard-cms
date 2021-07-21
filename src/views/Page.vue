@@ -21,7 +21,7 @@
             </v-card>
         </v-dialog>
 
-        <h1>Page {{ page.title }}</h1>
+        <h1>Page {{ page.page_title }}</h1>
         <v-card class="page-widget">
             <v-card-title>Fields</v-card-title>
             <v-card-text v-if="pagemodule">

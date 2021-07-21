@@ -9,8 +9,8 @@
                 <tr v-for="(category, i) in categories" :key="i">
                     <td>{{ category.title }}</td>
                     <td>
-                        <v-btn :href="`/fields/categories/${category.uuid}`">Edit</v-btn>
-                        <v-btn color="error" @click="deleteCategory(category.uuid, i)">Delete</v-btn>
+                        <v-btn color="primary" :href="`/fields/categories/${category.uuid}`">Edit</v-btn>
+                        <v-btn plain color="error" @click="deleteCategory(category.uuid, i)">Delete</v-btn>
                     </td>
                 </tr>
             </tbody>

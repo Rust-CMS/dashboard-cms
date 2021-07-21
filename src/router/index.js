@@ -13,7 +13,7 @@ export const routes = [
 		name: "Page",
 		component: Page,
 		meta: {
-			show: false
+			show: false,
 		}
 	},
 	{
@@ -21,7 +21,8 @@ export const routes = [
 		name: "Pages",
 		component: Pages,
 		meta: {
-			show: true
+			show: true,
+			icon: "mdi-book-open-page-variant"
 		}
 	},
 	{
