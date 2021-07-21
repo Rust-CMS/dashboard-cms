@@ -11,7 +11,7 @@
                     <td>{{ field.title }}</td>
                     <td>{{ field.content }}</td>
                     <td class="actions">
-                        <v-btn color="primary" :href="`/fields/${field.uuid}`">Edit</v-btn>
+                        <v-btn class="black--text" color="primary" :href="`/fields/${field.uuid}`">Edit</v-btn>
                         <v-btn plain color="error" @click="deleteField(field.uuid, i)">Delete</v-btn>
                     </td>
                 </tr>

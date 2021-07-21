@@ -19,8 +19,8 @@
                         {{ page.page_url }}
                     </td>
                     <td class="actions">
-                        <v-btn color="primary" :href="page.page_url">View</v-btn>
-                        <v-btn color="primary" :href="`/pages/${page.uuid}`">Edit</v-btn>
+                        <v-btn class="black--text" color="primary" :href="page.page_url">View</v-btn>
+                        <v-btn class="black--text" color="primary" :href="`/pages/${page.uuid}`">Edit</v-btn>
                         <v-btn plain color="error" @click="deletePage(page.uuid, i)">DELETE</v-btn>
                     </td>
                 </tr>
