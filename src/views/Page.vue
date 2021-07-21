@@ -6,7 +6,7 @@
                     Create Field
                 </v-card-title>
                 <v-card-text>
-                    <FieldMutate @value="createField" :pages="pages" :field="{}" />
+                    <FieldMutate @value="createField" :currentPage="page.uuid" :pages="pages" :field="{}" />
                 </v-card-text>
             </v-card>
         </v-dialog>
@@ -16,7 +16,7 @@
                     Create Category
                 </v-card-title>
                 <v-card-text>
-                    <CategoryMutate @value="createCategory" :pages="pages" :category="{}" />
+                    <CategoryMutate @value="createCategory" :currentPage="page.uuid" :pages="pages" :category="{}" />
                 </v-card-text>
             </v-card>
         </v-dialog>
@@ -87,17 +87,14 @@ export default {
     },
     methods: {
         async createCategory(category) {
-            this.pagemodule.fields.categories.push(category);
-            await post(`/category`, category);
+            let res = await post(`/category`, category);
+
+            this.pagemodule.fields.categories.push(res.data.message);
         },
         async createField(field) {
-            this.pagemodule.fields.modules.push(field);
+            let res = await post(`/modules`, field);
 
-            let req_field = {
-                ...field,
-                module_type_id: 1,
-            };
-            await post(`/modules`, req_field);
+            this.pagemodule.fields.modules.push(res.data.message);
         },
         async getPage() {
             let id = this.$route.params.id;

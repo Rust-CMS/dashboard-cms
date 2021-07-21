@@ -12,7 +12,7 @@
         <v-card class="fields">
             <v-card-title>Edit Category</v-card-title>
             <v-card-text>
-                <CategoryMutate v-if="Object.keys(category).length > 0" :category="category" @value="updateCategory" />
+                <CategoryMutate v-if="Object.keys(category).length > 0" :category="category" :pages="pages" @value="updateCategory" />
             </v-card-text>
         </v-card>
     </div>
@@ -30,15 +30,18 @@ export default {
     data () {
         return {
             fields: [],
+            pages: [],
             category: {}
         }
     },
     async created() {
         let category = await this.getCategory();
         let fields = await this.getFields();
+        let pages = await this.getPages();
 
         this.category = category.data.message;
         this.fields = fields.data.message;
+        this.pages = pages.data.message;
     },
     methods: {
         async updateCategory(category) {
@@ -53,6 +56,9 @@ export default {
         async getCategory() {
             let id = this.$route.params.id;
             return await get(`/category/${id}`);
+        },
+        async getPages() {
+            return await get(`/pages`)
         }
     }
 };
