@@ -12,14 +12,16 @@
         <h1>Pages</h1>
 
         <v-card class="mt-5">
-            <v-card-title> Page List </v-card-title>
-            <v-card-text>
-                <div v-if="pages">
-                    <v-btn @click="pageDialog = true">+</v-btn>
-                    <PageTable :pages="pages" />
-                </div>
-                <v-progress-circular indeterminate color="primary" v-else />
-            </v-card-text>
+            <div v-if="pages">
+                <v-card-title> Page List </v-card-title>
+                <v-card-text>
+                    <div v-if="pages">
+                        <v-btn @click="pageDialog = true">+</v-btn>
+                        <PageTable :pages="pages" />
+                    </div>
+                </v-card-text>
+            </div>
+            <v-skeleton-loader v-else type="card"></v-skeleton-loader>
         </v-card>
     </div>
 </template>

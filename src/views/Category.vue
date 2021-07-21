@@ -17,28 +17,32 @@
         <h1>Category {{ category.title }}</h1>
 
         <v-card class="fields">
-            <v-card-title>Fields</v-card-title>
-            <v-card-text>
-                <div v-if="fields">
-                    <v-btn class="mb-3" @click="fieldDialog = true">+</v-btn>
-                    <FieldTable v-if="fields" :fields="fields" />
-                </div>
-                <v-progress-circular indeterminate color="primary" v-else />
-            </v-card-text>
+            <v-skeleton-loader v-if="!category" type="card"></v-skeleton-loader>
+            <div v-else>
+                <v-card-title>Fields</v-card-title>
+                <v-card-text>
+                    <div v-if="fields">
+                        <v-btn class="mb-3" @click="fieldDialog = true"
+                            >+</v-btn
+                        >
+                        <FieldTable :fields="fields" />
+                    </div>
+                </v-card-text>
+            </div>
         </v-card>
 
         <v-card class="fields">
-            <v-card-title>Edit Category</v-card-title>
-            <v-card-text>
-                <CategoryMutate
-                    v-if="category"
-                    :category="category"
-                    :pages="pages"
-                    @value="updateCategory"
-                />
-
-                <v-progress-circular indeterminate color="primary" v-else />
-            </v-card-text>
+            <v-skeleton-loader v-if="!category" type="card"></v-skeleton-loader>
+            <div v-else>
+                <v-card-title>Edit Category</v-card-title>
+                <v-card-text>
+                    <CategoryMutate
+                        :category="category"
+                        :pages="pages"
+                        @value="updateCategory"
+                    />
+                </v-card-text>
+            </div>
         </v-card>
     </div>
 </template>

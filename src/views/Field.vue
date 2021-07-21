@@ -3,18 +3,19 @@
         <h1 class="mb-5">Field {{ field.title }}</h1>
 
         <v-card>
-            <v-card-title>
-                Edit Field
-            </v-card-title>
-            <v-card-text>
-                <FieldMutate
-                    v-if="pages"
-                    @value="updateField"
-                    :field="field"
-                    :pages="pages"
-                />
-                <v-progress-circular indeterminate color="primary" v-else />
-            </v-card-text>
+            <v-skeleton-loader v-if="!pages" type="card"></v-skeleton-loader>
+            <div v-else>
+                <v-card-title> Edit Field </v-card-title>
+                <v-card-text>
+                    <FieldMutate
+                        v-if="pages"
+                        @value="updateField"
+                        :field="field"
+                        :pages="pages"
+                    />
+                    <v-skeleton-loader v-else type="card"></v-skeleton-loader>
+                </v-card-text>
+            </div>
         </v-card>
     </main>
 </template>

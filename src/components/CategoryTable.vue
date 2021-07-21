@@ -4,6 +4,7 @@
             <thead>
                 <th>Name</th>
                 <th>Actions</th>
+                <th>Field Count</th>
             </thead>
             <tbody>
                 <tr v-for="(category, i) in categories" :key="i">
@@ -12,6 +13,7 @@
                         <v-btn color="primary" :href="`/fields/categories/${category.uuid}`">Edit</v-btn>
                         <v-btn plain color="error" @click="deleteCategory(category.uuid, i)">Delete</v-btn>
                     </td>
+                    <td>{{category.modules.length}}</td>
                 </tr>
             </tbody>
         </template>

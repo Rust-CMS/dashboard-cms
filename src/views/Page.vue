@@ -2,23 +2,31 @@
     <div>
         <v-dialog v-model="createFieldDialog" max-width="600px">
             <v-card>
-                <v-card-title>
-                    Create Field
-                </v-card-title>
+                <v-card-title> Create Field </v-card-title>
                 <v-card-text>
-                    <FieldMutate v-if="page" @value="createField" :currentPage="page.uuid" :pages="pages" :field="{}" />
-                    <v-progress-circular indeterminate color="primary" v-else />
+                    <FieldMutate
+                        v-if="page"
+                        @value="createField"
+                        :currentPage="page.uuid"
+                        :pages="pages"
+                        :field="{}"
+                    />
+                    <v-skeleton-loader v-else type="card"></v-skeleton-loader>
                 </v-card-text>
             </v-card>
         </v-dialog>
         <v-dialog v-model="createCategoryDialog" max-width="600px">
             <v-card>
-                <v-card-title>
-                    Create Category
-                </v-card-title>
+                <v-card-title> Create Category </v-card-title>
                 <v-card-text>
-                    <CategoryMutate v-if="page" @value="createCategory" :currentPage="page.uuid" :pages="pages" :category="{}" />
-                    <v-progress-circular indeterminate color="primary" v-else />
+                    <CategoryMutate
+                        v-if="page"
+                        @value="createCategory"
+                        :currentPage="page.uuid"
+                        :pages="pages"
+                        :category="{}"
+                    />
+                    <v-skeleton-loader v-else type="card"></v-skeleton-loader>
                 </v-card-text>
             </v-card>
         </v-dialog>
@@ -28,32 +36,36 @@
             <v-card-title>Fields</v-card-title>
             <v-card-text>
                 <div v-if="pagemodule">
-                    <v-btn class="my-3" @click="createFieldDialog = true">+</v-btn>
+                    <v-btn class="my-3" @click="createFieldDialog = true"
+                        >+</v-btn
+                    >
                     <FieldTable :fields="pagemodule.fields.modules" />
                 </div>
-                <v-progress-circular indeterminate color="primary" v-else />
+                <v-skeleton-loader v-else type="card"></v-skeleton-loader>
             </v-card-text>
         </v-card>
         <v-card class="page-widget">
             <v-card-title>Categories</v-card-title>
             <v-card-text>
                 <div v-if="pagemodule">
-                    <v-btn class="my-3" @click="createCategoryDialog = true">+</v-btn>
-                    <CategoryTable :categories="pagemodule.fields.categories" />            
+                    <v-btn class="my-3" @click="createCategoryDialog = true"
+                        >+</v-btn
+                    >
+                    <CategoryTable :categories="pagemodule.fields.categories" />
                 </div>
-               <v-progress-circular indeterminate color="primary" v-else />
+                <v-skeleton-loader v-else type="card"></v-skeleton-loader>
             </v-card-text>
         </v-card>
         <v-card class="page-widget">
             <v-card-title>Edit Page</v-card-title>
-            <v-card-text >
+            <v-card-text>
                 <form v-if="page" class="page-form" @submit="updatePage">
                     <v-text-field type="text" v-model="page.page_name" />
                     <v-text-field type="text" v-model="page.page_url" />
                     <v-text-field type="text" v-model="page.page_title" />
                     <v-btn type="submit">Save</v-btn>
                 </form>
-                <v-progress-circular indeterminate color="primary" v-else />
+                <v-skeleton-loader v-else type="card"></v-skeleton-loader>
             </v-card-text>
         </v-card>
     </div>
