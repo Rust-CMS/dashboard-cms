@@ -1,38 +1,53 @@
 <template>
     <main>
-        <h1>Field {{ field.title }}</h1>
-        <form class="field-form" @submit="updateField">
-            <input type="text" v-model="field.title" />
-            <input type="text" v-model="field.content" />
-            <select v-model="field.page_name">
-                <option v-for="(page, i) in pages" :key="i" :value="page.page_name">{{page.page_name}}</option>
-            </select>
-            <button type="submit">Save</button>
-        </form>
+        <h1 class="mb-5">Field {{ field.title }}</h1>
+
+        <v-card>
+            <v-skeleton-loader v-if="!pages" type="card"></v-skeleton-loader>
+            <div v-else>
+                <v-card-title> Edit Field </v-card-title>
+                <v-card-text>
+                    <FieldMutate
+                        v-if="pages"
+                        @value="updateField"
+                        :field="field"
+                        :pages="pages"
+                    />
+                    <v-skeleton-loader v-else type="card"></v-skeleton-loader>
+                </v-card-text>
+            </div>
+        </v-card>
     </main>
 </template>
 
 <script>
 import { get, put } from "axios";
+import FieldMutate from "../components/FieldMutate.vue";
 
 export default {
     name: "Field",
+    components: {
+        FieldMutate,
+    },
     data() {
         return {
             field: {},
-            pages: []
-        }
+            pages: false,
+        };
     },
     async created() {
         let field = await this.getField();
-
         this.field = field.data.message;
 
         let pages = await this.getPages();
-
         this.pages = pages.data.message;
     },
     methods: {
+        async updateField(field) {
+            this.field = field;
+            let id = this.$route.params.id;
+            return await put(`/modules/${id}`, field);
+        },
         async getField() {
             let id = this.$route.params.id;
             return await get(`/modules/${id}`);
@@ -40,14 +55,8 @@ export default {
         async getPages() {
             return await get(`/pages`);
         },
-        async updateField(e) {
-            e.preventDefault();
-
-            let id = this.$route.params.id;
-            return await put(`/modules/${id}`, this.field);
-        }
-    }
-}
+    },
+};
 </script>
 
 <style scoped>
