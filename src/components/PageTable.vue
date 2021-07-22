@@ -64,7 +64,7 @@ export default {
 		getUrl(page) {
 			let apiUrl = process.env.VUE_APP_API_URL;
 
-			if (apiUrl || str.length !== 0) {
+			if (apiUrl || apiUrl.length !== 0) {
 				let url = new URL(apiUrl);
 				return `${url.origin}${page.page_url}`
 			} else {
