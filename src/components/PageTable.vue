@@ -7,7 +7,7 @@
                 <th>URL</th>
                 <th>Actions</th>
             </thead>
-            <tbody>
+            <tbody v-if="pages" >
                 <tr v-for="(page, i) in pages" :key="i">
                     <td>
                         {{ page.page_title }}
@@ -19,7 +19,7 @@
                         {{ page.page_url }}
                     </td>
                     <td class="actions">
-                        <v-btn class="black--text" color="primary" :href="`${process.env.VUE_APP_API_URL || 'http://localhost:9090'}${page.page_url}`">View</v-btn>
+                        <v-btn class="black--text" color="primary" :href="getUrl(page)">View</v-btn>
                         <v-btn class="black--text" color="primary" :href="`/pages/${page.uuid}`">Edit</v-btn>
                         <v-btn plain color="error" @click="deletePage(page.uuid, i)">DELETE</v-btn>
                     </td>
@@ -45,6 +45,9 @@ export default {
             Axios.delete(`/pages/${id}`);
 
             this.pages.splice(idx, 1)
+        },
+        getUrl(page) {
+            return `${process.env.VUE_APP_API_URL || 'http://localhost:9090'}${page.page_url}`
         }
     }
 };
