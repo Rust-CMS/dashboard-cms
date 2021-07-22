@@ -53,6 +53,8 @@ export default {
             let pageRes = await post(`/pages`, page);
 
             this.pages.push(pageRes.data.message);
+
+            this.pageDialog = false;
         },
         async getPages() {
             let pagesRes = await get("/pages");
