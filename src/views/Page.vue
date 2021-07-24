@@ -95,20 +95,20 @@ export default {
     },
     async created() {
         let pagemodule = await this.getPage();
-        this.pagemodule = pagemodule.message;
-        let page = { ...pagemodule.message };
+        this.pagemodule = pagemodule;
+        let page = { ...pagemodule };
         delete page.fields;
         this.page = page;
 
         let pages = await this.getPages();
-        this.pages = pages.message;
+        this.pages = pages;
     },
     methods: {
         async createCategory(category) {
             let res = await post(`/category`, category);
 
             res = {
-                ...res.data.message,
+                ...res.data,
                 modules: []
             }
 
@@ -119,7 +119,7 @@ export default {
         async createField(field) {
             let res = await post(`/modules`, field);
 
-            this.pagemodule.fields.modules.push(res.data.message);
+            this.pagemodule.fields.modules.push(res.data);
 
             this.createFieldDialog = false;
         },

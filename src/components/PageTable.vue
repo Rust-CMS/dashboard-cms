@@ -64,11 +64,11 @@ export default {
 		getUrl(page) {
 			let apiUrl = process.env.VUE_APP_API_URL;
 
-			if (apiUrl || apiUrl.length !== 0) {
+			if (!apiUrl || apiUrl.length === 0) {
+                return `http://localhost:9090${page.page_url}`
+			} else {
 				let url = new URL(apiUrl);
 				return `${url.origin}${page.page_url}`
-			} else {
-                return `http://localhost:9090${page.page_url}`
             }
 		},
 	},
