@@ -46,13 +46,13 @@ export default {
     },
     async created() {
         let pages = await this.getPages();
-        this.pages = pages.message;
+        this.pages = pages;
     },
     methods: {
         async createPage(page) {
             let pageRes = await post(`/pages`, page);
 
-            this.pages.push(pageRes.data.message);
+            this.pages.push(pageRes.data);
 
             this.pageDialog = false;
         },

@@ -37,10 +37,10 @@ export default {
     },
     async created() {
         let field = await this.getField();
-        this.field = field.data.message;
+        this.field = field.data;
 
         let pages = await this.getPages();
-        this.pages = pages.data.message;
+        this.pages = pages.data;
     },
     methods: {
         async updateField(field) {

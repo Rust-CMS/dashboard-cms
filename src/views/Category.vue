@@ -72,15 +72,15 @@ export default {
         let fields = await this.getFields();
         let pages = await this.getPages();
 
-        this.category = category.data.message;
-        this.fields = fields.data.message;
-        this.pages = pages.data.message;
+        this.category = category.data;
+        this.fields = fields.data;
+        this.pages = pages.data;
     },
     methods: {
         async createField(field) {
             let newModule = await post(`/modules`, field);
 
-            this.fields.push(newModule.data.message);
+            this.fields.push(newModule.data);
         },
         async updateCategory(category) {
             this.category = category;
