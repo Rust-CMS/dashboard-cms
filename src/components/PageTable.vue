@@ -5,10 +5,10 @@
 				<th>Title</th>
 				<th>Name</th>
 				<th>URL</th>
-				<th v-if="window.innerWidth >= 600">Actions</th>
+				<th v-if="!$vuetify.breakpoint.mobile">Actions</th>
 			</thead>
 			<tbody v-if="pages">
-				<tr v-for="(page, i) in pages" :key="i" @click="window.innerWidth < 600 ? navPage(page.uuid) : null">
+				<tr v-for="(page, i) in pages" :key="i" @click="$vuetify.breakpoint.mobile ? navPage(page.uuid) : null">
 					<td>
 						{{ page.page_title }}
 					</td>
@@ -18,7 +18,7 @@
 					<td>
 						{{ page.page_url }}
 					</td>
-					<td v-if="window.innerWidth >= 600" class="actions">
+					<td v-if="!$vuetify.breakpoint.mobile" class="actions">
 						<v-btn
 							class="black--text"
 							color="primary"
