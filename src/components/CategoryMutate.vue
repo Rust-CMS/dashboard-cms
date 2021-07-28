@@ -22,6 +22,8 @@
 </template>
 
 <script>
+import Vue from "vue";
+
 export default {
     props: {
         category: {
@@ -34,21 +36,31 @@ export default {
         pages: {
             required: false,
         },
+        reset: Boolean,
     },
     data() {
         return {
-            innerCategory: this.category,
+            innerCategory: Vue.util.extend({}, this.category),
         };
     },
     created() {
-        if (this.currentPage && !this.category.uuid) {
-            this.innerCategory.page_uuid = this.currentPage;
-        }
+        this.addCategoryPageUuid();
     },
     methods: {
+        addCategoryPageUuid() {
+            if (this.currentPage && !this.category.uuid) {
+                this.innerCategory.page_uuid = this.currentPage;
+            }
+        },
         mutate($evt) {
             $evt.preventDefault();
+
             this.$emit("value", this.innerCategory);
+
+            if (this.reset) {
+                this.innerCategory = Vue.util.extend({}, this.category);
+                this.addCategoryPageUuid();
+            }
         },
     },
 };

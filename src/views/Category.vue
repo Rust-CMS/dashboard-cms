@@ -8,7 +8,8 @@
                         @value="createField"
                         :currentPage="category.page_uuid"
                         :pages="pages"
-                        :field="{ category_uuid: category.uuid }"
+                        :field="mutField"
+                        reset
                     />
                 </v-card-text>
             </v-card>
@@ -64,6 +65,7 @@ export default {
             pages: false,
             category: false,
 
+            mutField: { category_uuid: this.category.uuid },
             fieldDialog: false,
         };
     },
@@ -78,6 +80,7 @@ export default {
     },
     methods: {
         async createField(field) {
+            this.fieldDialog = false;
             let newModule = await post(`/modules`, field);
 
             this.fields.push(newModule.data);

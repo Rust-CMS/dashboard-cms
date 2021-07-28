@@ -4,7 +4,7 @@
             <v-card>
                 <v-card-title> Create Page </v-card-title>
                 <v-card-text>
-                    <PageMutate @value="createPage" />
+                    <PageMutate @value="createPage" reset />
                 </v-card-text>
             </v-card>
         </v-dialog>
@@ -50,6 +50,8 @@ export default {
     },
     methods: {
         async createPage(page) {
+            console.log(page);
+
             let pageRes = await post(`/pages`, page);
 
             this.pages.push(pageRes.data);
