@@ -17,7 +17,7 @@
                 <v-card-text>
                     <div v-if="pages">
                         <v-btn @click="pageDialog = true">+</v-btn>
-                        <PageTable :pages="pages" />
+                        <PageTable class="mt-5" :pages="pages" />
                     </div>
                 </v-card-text>
             </div>

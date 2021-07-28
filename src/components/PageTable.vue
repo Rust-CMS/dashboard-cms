@@ -5,10 +5,10 @@
 				<th>Title</th>
 				<th>Name</th>
 				<th>URL</th>
-				<th>Actions</th>
+				<th v-if="window.innerWidth >= 600">Actions</th>
 			</thead>
 			<tbody v-if="pages">
-				<tr v-for="(page, i) in pages" :key="i">
+				<tr v-for="(page, i) in pages" :key="i" @click="window.innerWidth < 600 ? navPage(page.uuid) : null">
 					<td>
 						{{ page.page_title }}
 					</td>
@@ -18,7 +18,7 @@
 					<td>
 						{{ page.page_url }}
 					</td>
-					<td class="actions">
+					<td v-if="window.innerWidth >= 600" class="actions">
 						<v-btn
 							class="black--text"
 							color="primary"
@@ -28,7 +28,7 @@
 						<v-btn
 							class="black--text"
 							color="primary"
-							:href="`/pages/${page.uuid}`"
+							@click="navPage(page.uuid)"
 							>Edit</v-btn
 						>
 						<v-btn
@@ -55,6 +55,11 @@ export default {
 			required: true,
 		},
 	},
+	data() {
+		return {
+			window
+		}
+	},
 	methods: {
 		deletePage(id, idx) {
 			Axios.delete(`/pages/${id}`);
@@ -71,6 +76,9 @@ export default {
 				return `${url.origin}${page.page_url}`
             }
 		},
+		navPage(uuid) {
+			this.$router.push(`/pages/${uuid}`)
+		}
 	},
 };
 </script>
