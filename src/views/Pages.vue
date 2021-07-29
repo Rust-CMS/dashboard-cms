@@ -4,7 +4,7 @@
             <v-card>
                 <v-card-title> Create Page </v-card-title>
                 <v-card-text>
-                    <PageMutate @value="createPage" />
+                    <PageMutate @value="createPage" reset />
                 </v-card-text>
             </v-card>
         </v-dialog>
@@ -17,7 +17,7 @@
                 <v-card-text>
                     <div v-if="pages">
                         <v-btn @click="pageDialog = true">+</v-btn>
-                        <PageTable :pages="pages" />
+                        <PageTable class="mt-5" :pages="pages" />
                     </div>
                 </v-card-text>
             </div>
@@ -50,6 +50,8 @@ export default {
     },
     methods: {
         async createPage(page) {
+            console.log(page);
+
             let pageRes = await post(`/pages`, page);
 
             this.pages.push(pageRes.data);

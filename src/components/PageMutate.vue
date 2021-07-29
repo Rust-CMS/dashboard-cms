@@ -10,6 +10,7 @@
 </template>
 
 <script>
+import Vue from "vue";
     export default {
         props: {
             page: {
@@ -21,17 +22,23 @@
                     page_title: ""
                     }
                 }
-            }
+            },
+            reset: Boolean
         },
         data() {
             return {
-                innerPage: this.page
+                innerPage: Vue.util.extend({}, this.page)
             }
         },
         methods: {
             mutate($evt) {
                 $evt.preventDefault();
-                this.$emit("value", this.innerPage)
+
+                this.$emit("value", this.innerPage);
+
+                if (this.reset) {
+                    this.innerPage = Vue.util.extend({}, this.page);
+                }
             }
         }
     }

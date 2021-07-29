@@ -1,10 +1,11 @@
 <template>
     <v-app id="app">
         <v-app-bar app clipped-left dark>
+            <v-app-bar-nav-icon v-if="$vuetify.breakpoint.mobile" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
             <v-toolbar-title>RCMS Dashboard</v-toolbar-title>
         </v-app-bar>
 
-        <v-navigation-drawer app clipped permanent>
+        <v-navigation-drawer v-model="drawer" app clipped :temporary="$vuetify.breakpoint.mobile" :permanent="!$vuetify.breakpoint.mobile">
             <v-list nav dense> 
                 <v-list-item-group
                     active-class=""
@@ -38,6 +39,8 @@ export default {
     name: "App",
 	data() {
 		return {
+            drawer: false,
+            window: window,
 			routes
 		}
 	}

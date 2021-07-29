@@ -10,6 +10,7 @@
                         :currentPage="page.uuid"
                         :pages="pages"
                         :field="{}"
+                        reset
                     />
                     <v-skeleton-loader v-else type="card"></v-skeleton-loader>
                 </v-card-text>
@@ -25,6 +26,7 @@
                         :currentPage="page.uuid"
                         :pages="pages"
                         :category="{}"
+                        reset
                     />
                     <v-skeleton-loader v-else type="card"></v-skeleton-loader>
                 </v-card-text>
