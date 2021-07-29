@@ -74,7 +74,7 @@ export default {
         let fields = await this.getFields();
         let pages = await this.getPages();
 
-        this.mutField = { category_uuid: this.category.uuid }
+        this.mutField = { category_uuid: category.data.uuid }
 
         this.category = category.data;
         this.fields = fields.data;
