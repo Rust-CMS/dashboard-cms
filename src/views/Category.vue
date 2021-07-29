@@ -65,7 +65,7 @@ export default {
             pages: false,
             category: false,
 
-            mutField: { category_uuid: this.category.uuid },
+            mutField: false,
             fieldDialog: false,
         };
     },
@@ -73,6 +73,8 @@ export default {
         let category = await this.getCategory();
         let fields = await this.getFields();
         let pages = await this.getPages();
+
+        this.mutField = { category_uuid: this.category.uuid }
 
         this.category = category.data;
         this.fields = fields.data;
