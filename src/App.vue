@@ -2,7 +2,7 @@
     <v-app id="app">
         <v-app-bar app clipped-left dark>
             <v-app-bar-nav-icon v-if="$vuetify.breakpoint.mobile" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-            <v-toolbar-title>RCMS Dashboard</v-toolbar-title>
+            <v-toolbar-title>Radical Dashboard</v-toolbar-title>
             <logout v-if="loggedIn" />
         </v-app-bar>
 

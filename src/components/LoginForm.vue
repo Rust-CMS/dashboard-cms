@@ -5,7 +5,7 @@
 				<v-text-field v-model="username" label="Username" required />
 			</v-row>
 			<v-row>
-				<v-text-field v-model="password" label="Password" required />
+				<v-text-field type="password" v-model="password" label="Password" required />
 			</v-row>
 			<v-row>
 				<v-btn type="submit" color="primary" @click="login"
