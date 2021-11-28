@@ -28,6 +28,8 @@ export default {
         async login() {
             try {
                 await post('/user/login', {username: this.username, password: this.password});
+
+                this.$router.push("/");
             } catch (e) {
                 // TODO replace
                 alert(e);

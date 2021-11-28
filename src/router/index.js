@@ -66,10 +66,14 @@ const router = new VueRouter({
 	routes
 })
 
-const loggedIn = async () => {
-	let isLoggedIn = await get("/user");
+export const loggedIn = async () => {
+	try {
+		await get("/user");
 
-	return isLoggedIn.status === 200;
+		return true;
+	} catch (e) {
+		return false;
+	}
 }
 
 /**
@@ -78,11 +82,13 @@ const loggedIn = async () => {
  */
 router.beforeEach((to, from, next) => {
 	if (to.meta.protected) {
-		if (loggedIn()) {
-			next();
-		} else {
-			next("/login");
-		}
+		loggedIn().then(res => {
+			if (res) {
+				next();
+			} else {
+				next("/login")
+			}
+		})
 	} else {
 		next()
 	}

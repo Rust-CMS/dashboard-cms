@@ -3,6 +3,7 @@
         <v-app-bar app clipped-left dark>
             <v-app-bar-nav-icon v-if="$vuetify.breakpoint.mobile" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
             <v-toolbar-title>RCMS Dashboard</v-toolbar-title>
+            <logout v-if="loggedIn" />
         </v-app-bar>
 
         <v-navigation-drawer v-model="drawer" app clipped :temporary="$vuetify.breakpoint.mobile" :permanent="!$vuetify.breakpoint.mobile">
@@ -33,17 +34,28 @@
 <script>
 import { routes } from "@/router/index"
 import NavItem from "./components/NavItem.vue"
+import Logout from './components/Logout.vue';
+import { loggedIn } from "./router/index";
 
 export default {
-    components: { NavItem }, 
+    components: { NavItem, Logout }, 
     name: "App",
 	data() {
 		return {
             drawer: false,
             window: window,
+            loggedIn: false,
 			routes
 		}
-	}
+	},
+    created() {
+        this.logged();
+    },
+    methods: {
+        async logged() {
+            return await loggedIn()
+        }
+    }
 };
 </script>
 

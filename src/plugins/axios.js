@@ -21,7 +21,6 @@ function getCookie(name) {
 axios.interceptors.request.use(
     function (conf) {
         let auth = getCookie("auth");
-        console.log(auth);
         conf.headers.Authorization = auth ? `${auth}` : '';
 
         return conf;
