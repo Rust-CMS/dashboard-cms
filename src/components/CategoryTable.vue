@@ -10,7 +10,7 @@
                 <tr v-for="(category, i) in categories" :key="i" @click="$vuetify.breakpoint.mobile ? navCategory(category.uuid) : null">
                     <td>{{ category.title }}</td>
                     <td v-if="!$vuetify.breakpoint.mobile" class="actions">
-                        <v-btn class="black--text" color="primary" @click="navCategory(category.uuid)">Edit</v-btn>
+                        <v-btn color="primary" @click="navCategory(category.uuid)">Edit</v-btn>
                         <v-btn plain color="error" @click="deleteCategory(category.uuid, i)">Delete</v-btn>
                     </td>
                     <td>{{category.modules.length}}</td>

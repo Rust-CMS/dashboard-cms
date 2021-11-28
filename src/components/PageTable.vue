@@ -20,13 +20,11 @@
 					</td>
 					<td v-if="!$vuetify.breakpoint.mobile" class="actions">
 						<v-btn
-							class="black--text"
 							color="primary"
 							:href="getUrl(page)"
 							>View</v-btn
 						>
 						<v-btn
-							class="black--text"
 							color="primary"
 							@click="navPage(page.uuid)"
 							>Edit</v-btn

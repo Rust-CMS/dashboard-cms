@@ -11,7 +11,7 @@
                     <td>{{ field.title }}</td>
                     <td>{{ field.content }}</td>
                     <td v-if="!$vuetify.breakpoint.mobile" class="actions">
-                        <v-btn class="black--text" color="primary" @click="navField(field.uuid)">Edit</v-btn>
+                        <v-btn color="primary" @click="navField(field.uuid)">Edit</v-btn>
                         <v-btn plain color="error" @click="deleteField(field.uuid, i)">Delete</v-btn>
                     </td>
                 </tr>
