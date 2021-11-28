@@ -6,6 +6,9 @@ import Page from '@/views/Page';
 import Field from '@/views/Field';
 import Category from "@/views/Category";
 import Login from "@/views/Login";
+
+import { get } from "axios";
+
 Vue.use(VueRouter)
 
 export const routes = [
@@ -63,8 +66,10 @@ const router = new VueRouter({
 	routes
 })
 
-const loggedIn = () => {
-	console.log(document.cookie)
+const loggedIn = async () => {
+	let isLoggedIn = await get("/user");
+
+	return isLoggedIn.status === 200;
 }
 
 /**

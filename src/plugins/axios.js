@@ -8,52 +8,57 @@ import axios from "axios";
 // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 axios.defaults.baseURL = process.env.VUE_APP_API_URL || "http://localhost:9090/v1/";
 axios.defaults.withCredentials = true;
-let config = {
-  //baseURL 
-  // timeout: 60 * 1000, // Timeout
-  // withCredentials: true, // Check cross-site Access-Control
-};
+let config = {};
 
-const _axios = axios.create(config);
+const instance = axios.create(config);
 
-_axios.interceptors.request.use(
-  function(config) {
-    // Do something before request is sent
-    return config;
-  },
-  function(error) {
-    // Do something with request error
-    return Promise.reject(error);
-  }
+function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+}
+
+axios.interceptors.request.use(
+    function (conf) {
+        let auth = getCookie("auth");
+        console.log(auth);
+        conf.headers.Authorization = auth ? `${auth}` : '';
+
+        return conf;
+    },
+    function (error) {
+        // Do something with request error
+        return Promise.reject(error);
+    }
 );
 
 // Add a response interceptor
-_axios.interceptors.response.use(
-  function(response) {
-    // Do something with response data
-    return response;
-  },
-  function(error) {
-    // Do something with response error
-    return Promise.reject(error);
-  }
+instance.interceptors.response.use(
+    function (response) {
+        // Do something with response data
+        return response;
+    },
+    function (error) {
+        // Do something with response error
+        return Promise.reject(error);
+    }
 );
 
-Plugin.install = function(Vue) {
-  Vue.axios = _axios;
-  window.axios = _axios;
-  Object.defineProperties(Vue.prototype, {
-    axios: {
-      get() {
-        return _axios;
-      }
-    },
-    $axios: {
-      get() {
-        return _axios;
-      }
-    },
-  });
+Plugin.install = function (Vue) {
+    Vue.axios = instance;
+    window.axios = instance;
+    Object.defineProperties(Vue.prototype, {
+        axios: {
+            get() {
+                return instance;
+            }
+        },
+        $axios: {
+            get() {
+                return instance;
+            }
+        },
+    });
 };
 
 Vue.use(Plugin)
