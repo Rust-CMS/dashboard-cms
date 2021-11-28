@@ -48,12 +48,11 @@ export default {
 			routes
 		}
 	},
-    created() {
-        this.logged();
-    },
-    methods: {
-        async logged() {
-            return await loggedIn()
+    watch: {
+        $route() {
+            loggedIn().then(res => {
+                this.loggedIn = res;
+            });
         }
     }
 };
