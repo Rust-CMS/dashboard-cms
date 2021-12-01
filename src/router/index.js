@@ -6,6 +6,7 @@ import Page from '@/views/Page';
 import Field from '@/views/Field';
 import Category from "@/views/Category";
 import Login from "@/views/Login";
+import UpdateUser from "@/views/UpdateUser";
 
 import { get } from "axios";
 
@@ -19,6 +20,15 @@ export const routes = [
 		meta: {
 			show: false,
 			protected: false
+		}
+	},
+	{
+		path: "/update",
+		name: "Update User",
+		component: UpdateUser,
+		meta: {
+			show: false,
+			protected: true
 		}
 	},
 	{
