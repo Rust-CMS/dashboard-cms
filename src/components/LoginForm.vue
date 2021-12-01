@@ -39,12 +39,16 @@ export default {
 			e.preventDefault();
 
 			try {
-				await post("/user/login", {
+				let data = await post("/user/login", {
 					username: this.username,
 					password: this.password,
 				});
 
-				this.$router.push("/");
+				if (data.status === 202) {
+					this.$router.push(`/update?username=${this.username}`);
+				} else {
+					this.$router.push("/");
+				}
 			} catch (e) {
 				// TODO replace
 				alert(e);
